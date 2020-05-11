@@ -1,0 +1,6 @@
+{
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.pythonPath": "C:\\Users\\kepy1\\.virtualenvs\\bts-61DO_gum\\Scripts\\python.exe",
+  "python.formatting.provider": "black"
+}
