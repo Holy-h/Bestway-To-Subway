@@ -19,14 +19,21 @@ class Menu(core_models.ItemModel):
     )
     ingredient = models.CharField(verbose_name="속재료", max_length=40, default="")
     price = models.IntegerField(verbose_name="가격", default=0)
+    photo = models.ImageField(
+        verbose_name="이미지", upload_to="images/menus", null=True, blank=True
+    )
 
 
 class Bread(core_models.ItemModel):
-    pass
+    photo = models.ImageField(
+        verbose_name="이미지", upload_to="images/breads", null=True, blank=True
+    )
 
 
 class Cheese(core_models.ItemModel):
-    pass
+    photo = models.ImageField(
+        verbose_name="이미지", upload_to="images/cheeses", null=True, blank=True
+    )
 
 
 class Sauce(core_models.ItemModel):
@@ -44,6 +51,9 @@ class Sauce(core_models.ItemModel):
     )
     categories = models.CharField(
         choices=CATEGORY_CHOICES, default=CATEGORY_OTHER, max_length=40
+    )
+    photo = models.ImageField(
+        verbose_name="이미지", upload_to="images/sauces", null=True, blank=True
     )
 
 

@@ -122,9 +122,22 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
+""" 
+Django 커스터마이징
+"""
 
 # Substituting a custom User model
 # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#substituting-a-custom-user-model
 # https://docs.djangoproject.com/en/3.0/ref/settings/#std:setting-AUTH_USER_MODEL
 
 AUTH_USER_MODEL = "users.User"
+
+
+# Where to Save
+# https://docs.djangoproject.com/en/3.0/ref/models/fields/#django.db.models.FileField.storage
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+
+# Where to Find
+
+MEDIA_URL = "/media/"
