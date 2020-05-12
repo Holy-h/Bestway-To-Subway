@@ -4,7 +4,51 @@ from . import models
 
 @admin.register(models.Sandwich)
 class SandwichAdmin(admin.ModelAdmin):
-    pass
+
+    list_display = ("menu", "bread", "get_cheeses", "get_sauces", "get_total_calories")
+
+    fieldsets = (
+        (None, {"fields": ("menu", "bread", "cheese", "sauce", "views", "orders"),}),
+    )
+    readonly_fields = ("views", "orders")
+
+    def get_sauces(self, obj):
+        return ", ".join([s.name for s in obj.sauce.all()])
+
+    get_sauces.short_description = "소스"
+
+    def get_cheeses(self, obj):
+        return ", ".join([c.name for c in obj.cheese.all()])
+
+    get_cheeses.short_description = "치즈"
+
+
+@admin.register(models.Menu)
+class MenuAdmin(admin.ModelAdmin):
+    list_display = ("name", "categories", "en_name", "calorie", "price", "limited")
+
+    ordering = (
+        "categories",
+        "name",
+    )
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "categories",
+                    "name",
+                    "en_name",
+                    "calorie",
+                    "bio",
+                    "ingredient",
+                    "price",
+                    "limited",
+                ),
+            },
+        ),
+    )
 
 
 @admin.register(models.Bread)
@@ -23,6 +67,25 @@ class CheeseAdmin(admin.ModelAdmin):
 
 @admin.register(models.Sauce)
 class SauceAdmin(admin.ModelAdmin):
-    list_display = ("name", "en_name", "calorie", "limited")
+    list_display = ("name", "en_name", "categories", "calorie", "limited")
 
-    ordering = ("name",)
+    ordering = (
+        "categories",
+        "name",
+    )
+
+    fieldsets = (
+        (
+            None,
+            {
+                "fields": (
+                    "categories",
+                    "name",
+                    "en_name",
+                    "calorie",
+                    "bio",
+                    "limited",
+                ),
+            },
+        ),
+    )
