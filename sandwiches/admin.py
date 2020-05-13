@@ -26,7 +26,7 @@ class SandwichAdmin(admin.ModelAdmin):
 
 @admin.register(models.Menu)
 class MenuAdmin(admin.ModelAdmin):
-    list_display = ("name", "categories", "en_name", "calorie", "price", "limited")
+    list_display = ("name", "categories", "calorie", "price", "get_thumbnail")
 
     ordering = (
         "categories",
@@ -51,6 +51,13 @@ class MenuAdmin(admin.ModelAdmin):
             },
         ),
     )
+
+    def get_thumbnail(self, obj):
+        if obj.photo:
+            # print(dir(obj.photo))
+            return mark_safe(f"<img style='height: 60px;' src='{obj.photo.url}' />")
+
+    get_thumbnail.short_description = "이미지"
 
 
 @admin.register(models.Bread)
