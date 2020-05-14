@@ -3,9 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>서브웨이입니다!</title>
   </head>
   <body>
-    <h1>안녕하세요!!!</h1>
+    <h1>Bestway To Subway</h1>
+    <ul>
+      {% for sandwich in all_sandwiches %}
+      <li>
+        <p>{{sandwich.menu}}</p>
+        <img src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
+      </li>
+      {% endfor %}
+    </ul>
   </body>
 </html>
