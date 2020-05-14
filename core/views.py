@@ -1,5 +1,8 @@
+from datetime import datetime
 from django.shortcuts import render
 
 
 def home(request):
-    return render(request, "home")
+    now = datetime.now()
+    isHungry = True
+    return render(request, "home.html", context={"now": now, "isHungry": isHungry})
