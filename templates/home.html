@@ -6,19 +6,21 @@
 <ul>
   {% for sandwich in fav_sandwiches %}
   <li>
-    <p>{{sandwich.menu}}</p>
-    <img src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
-    <p>{{sandwich.bread}}</p>
-    <p>
-      {% for sauce in sandwich.sauces.all %}
-        {{sauce}}
-      {% endfor %}
-    </p>
-    <p>
-      {% for cheese in sandwich.cheeses.all %}
-        {{cheese}}
-      {% endfor %}
-    </p>
+    <a href="/sandwich/{{sandwich.pk}}">
+      <p>{{sandwich.menu}}</p>
+      <img src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
+      <p>{{sandwich.bread}}</p>
+      <p>
+        {% for sauce in sandwich.sauces.all %}
+          {{sauce}}
+        {% endfor %}
+      </p>
+      <p>
+        {% for cheese in sandwich.cheeses.all %}
+          {{cheese}}
+        {% endfor %}
+      </p>
+    </a>
   </li>
   {% endfor %}
 </ul>
