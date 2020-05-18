@@ -6,12 +6,19 @@ from . import models
 @admin.register(models.Sandwich)
 class SandwichAdmin(admin.ModelAdmin):
 
-    list_display = ("menu", "bread", "get_cheeses", "get_sauces", "get_total_calories")
+    list_display = (
+        "menu",
+        "bread",
+        "get_cheeses",
+        "get_sauces",
+        "get_total_calories",
+        "views",
+    )
 
     fieldsets = (
         (None, {"fields": ("menu", "bread", "cheese", "sauce", "views", "orders"),}),
     )
-    readonly_fields = ("views", "orders")
+    readonly_fields = ("orders",)
 
     def get_sauces(self, obj):
         return ", ".join([s.name for s in obj.sauce.all()])

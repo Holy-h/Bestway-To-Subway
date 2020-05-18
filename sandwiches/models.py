@@ -72,8 +72,8 @@ class Sandwich(models.Model):
         on_delete=models.SET_NULL,
         null=True,
     )
-    sauce = models.ManyToManyField("Sauce", verbose_name="소스")
-    cheese = models.ManyToManyField("Cheese", verbose_name="치즈")
+    sauces = models.ManyToManyField("Sauce", verbose_name="소스")
+    cheeses = models.ManyToManyField("Cheese", verbose_name="치즈")
     views = models.IntegerField(verbose_name="조회수", blank=True, default=0)
     orders = models.IntegerField(verbose_name="주문수", blank=True, default=0)
 
@@ -83,10 +83,10 @@ class Sandwich(models.Model):
     def get_total_calories(self):
         menu = self.menu
         bread = self.bread
-        sauces = self.sauce.all()
+        sauces = self.sauces.all()
         sauces_cal = sum([s.calorie for s in sauces])
 
-        cheeses = self.cheese.all()
+        cheeses = self.cheeses.all()
         cheeses_cal = sum([c.calorie for c in cheeses])
 
         return f"{menu.calorie + bread.calorie + sauces_cal + cheeses_cal}kcal"

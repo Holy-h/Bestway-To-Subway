@@ -1,7 +1,7 @@
 {
   "python.linting.flake8Enabled": true,
   "python.linting.enabled": true,
-  "python.pythonPath": "C:\\Users\\kepy1\\.virtualenvs\\Bestway-To-Subway-Vm6m6sYQ\\Scripts\\python.exe",
+  "python.pythonPath": "/Users/byunghun/.local/share/virtualenvs/Bestway-To-Subway-WVHhItwU/bin/python",
   "python.formatting.provider": "black",
   "python.linting.flake8Args": ["--max-line-length=ignore"],
   "editor.tabSize": 2
