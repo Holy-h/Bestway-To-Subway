@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 from core import models as core_models
 
 
@@ -76,6 +77,9 @@ class Sandwich(models.Model):
     cheeses = models.ManyToManyField("Cheese", verbose_name="치즈")
     views = models.IntegerField(verbose_name="조회수", blank=True, default=0)
     orders = models.IntegerField(verbose_name="주문수", blank=True, default=0)
+
+    def get_absolute_url(self):
+        return reverse("sandwiches:detail", kwargs={"pk": self.pk})
 
     def __str__(self):
         return f"{self.menu}-{self.bread}"

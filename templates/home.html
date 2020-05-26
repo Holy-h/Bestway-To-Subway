@@ -6,7 +6,7 @@
 <ul>
   {% for sandwich in fav_sandwiches %}
   <li>
-    <a href="/sandwich/{{sandwich.pk}}">
+    <a href="{% url 'sandwiches:detail' sandwich.pk %}">
       <p>{{sandwich.menu}}</p>
       <img src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
       <p>{{sandwich.bread}}</p>

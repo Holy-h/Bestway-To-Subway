@@ -5,7 +5,22 @@
 
 {% block context %}
 
-<h1>{{sandwich}}</h1>
+<h1>{{sandwich.menu}}</h1>
 <img src="/media/{{sandwich.menu.photo}}"/>
+
+<p>{{ sandwich.bread }}</p>
+<img src="/media/{{ sandwich.bread.photo }}" />
+
+{% for cheese in sandwich.cheeses.all %}
+  <p>{{ cheese.name }}</p>
+  <img src="/media/{{ cheese.photo }}" />
+{% endfor %}
+
+{% for sauce in sandwich.sauces.all %}
+  <p>{{ sauce.name }}</p>
+  <img src="/media/{{ sauce.photo }}" />
+{% endfor %}
+
+<h2>{{ sandwich.get_total_calories }}</h2>
 
 {% endblock context %}

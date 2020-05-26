@@ -16,17 +16,17 @@ class SandwichAdmin(admin.ModelAdmin):
     )
 
     fieldsets = (
-        (None, {"fields": ("menu", "bread", "cheese", "sauce", "views", "orders"),}),
+        (None, {"fields": ("menu", "bread", "cheeses", "sauces", "views", "orders"),}),
     )
     readonly_fields = ("orders",)
 
     def get_sauces(self, obj):
-        return ", ".join([s.name for s in obj.sauce.all()])
+        return ", ".join([s.name for s in obj.sauces.all()])
 
     get_sauces.short_description = "소스"
 
     def get_cheeses(self, obj):
-        return ", ".join([c.name for c in obj.cheese.all()])
+        return ", ".join([c.name for c in obj.cheeses.all()])
 
     get_cheeses.short_description = "치즈"
 
