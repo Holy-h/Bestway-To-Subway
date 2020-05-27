@@ -2,18 +2,21 @@
   "name": "bestway-to-subway",
   "version": "0.0.1",
   "description": "subway recipe",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Holy-h/Bestway-To-Subway.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Holy-h/Bestway-To-Subway/issues"
+  "scripts": {
+    "css": "gulp"
   },
-  "homepage": "https://github.com/Holy-h/Bestway-To-Subway#readme"
+  "homepage": "https://github.com/Holy-h/Bestway-To-Subway#readme",
+  "devDependencies": {
+    "autoprefixer": "^9.8.0",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1",
+    "tailwindcss": "^1.4.6"
+  }
 }
