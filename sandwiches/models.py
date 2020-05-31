@@ -77,6 +77,8 @@ class Sandwich(models.Model):
     cheeses = models.ManyToManyField("Cheese", verbose_name="치즈")
     views = models.IntegerField(verbose_name="조회수", blank=True, default=0)
     orders = models.IntegerField(verbose_name="주문수", blank=True, default=0)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def get_absolute_url(self):
         return reverse("sandwiches:detail", kwargs={"pk": self.pk})

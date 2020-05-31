@@ -121,6 +121,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+# Static files에 접근할 수 있도록 하는 주소
+
+# Export
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+# Static file이 있는 디렉토리
 
 """ 
 Django 커스터마이징

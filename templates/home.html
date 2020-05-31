@@ -2,27 +2,83 @@
 {% block title %} HOME {% endblock title %}
 {% block context %}
 
-<h1>Bestway To Subway</h1>
-<ul>
-  {% for sandwich in fav_sandwiches %}
-  <li>
-    <a href="{% url 'sandwiches:detail' sandwich.pk %}">
-      <p>{{sandwich.menu}}</p>
-      <img src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
-      <p>{{sandwich.bread}}</p>
-      <p>
-        {% for sauce in sandwich.sauces.all %}
-          {{sauce}}
+<div class="container mx-auto grid grid-flow-row gap-10 mt-24 mb-20 overflow-hidden">
+  <section class="max-w-full bg-gray-400">
+    <img class="object-contain" src="https://blush.ly/r3p8TmcqV/p" alt="">
+  </section>
+  <section class="flex">
+    <button class="mx-auto text-lg font-bold py-4 px-20 border border-gray-400 rounded-full">
+      내 레시피 입력하기
+    </button>
+  </section>
+  <!-- AD 시작 -->
+  <section class="bg-gray-400 flex">
+    <img
+    class="mx-auto"
+      src="https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=&webp=1"
+      alt=""
+      srcset=
+        "
+          https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=1280&webp=1 1.5x,
+          https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=1536&webp=1 2x,
+          https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=2560&webp=1 3x
+        "
+    >
+  </section>
+  <!-- AD 끝 -->
+  <!-- 인기메뉴 시작 -->
+  <section class="max-w-full overflow-x-auto">
+    <h1 class="ml-4 text-xl font-bold mb-6">인기메뉴</h1>
+    <div class="overflow-x-scroll">
+      <ul class="w-auto grid grid-flow-col gap-8 px-4">
+        {% for sandwich in fav_sandwiches %}
+        <li class="border border-gray-200">
+          <a class="bg-yellow-500 w-72 grid grid-flow-row text-center gap-6 rounded-lg py-6" href="{% url 'sandwiches:detail' sandwich.pk %}">
+            <span class="text-lg text-white font-semibold">{{sandwich.menu}}</span>
+            <img class="" src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
+            <span class="text-lg font-semibold">{{sandwich.bread}}</span>
+            <span class="text-lg font-semibold">
+              {% for cheese in sandwich.cheeses.all %}
+                {{cheese}}
+              {% endfor %}
+            </span>
+            <span class="text-lg font-semibold">
+              {% for sauce in sandwich.sauces.all %}
+                {{sauce}}
+              {% endfor %}
+            </span>
+          </a>
+        </li>
         {% endfor %}
-      </p>
-      <p>
-        {% for cheese in sandwich.cheeses.all %}
-          {{cheese}}
+      </ul>
+    </div>
+  </section>
+  <!-- 인기메뉴 끝 -->
+  <!-- 새로운 레시피 시작 -->
+  <section class="max-w-full overflow-x-auto">
+    <h1 class="ml-4 text-xl font-bold mb-6">새로운 레시피 두둥등장!</h1>
+    <div class="w-full overflow-x-scroll">
+      <ul class="grid grid-flow-col gap-8 px-4">
+        {% for sandwich in new_sandwiches %}
+        <li class="border border-gray-200">
+          <a class="bg-green-600 w-72 grid grid-flow-row text-center gap-6 rounded-lg pt-6" href="{% url 'sandwiches:detail' sandwich.pk %}">
+            <span class="text-lg text-white font-semibold">{{sandwich.menu}}</span>
+            <img class="" src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
+          </a>
+        </li>
         {% endfor %}
-      </p>
+      </ul>
+    </div>
+  </section>
+  <!-- 새로운 레시피 끝 -->
+  <!-- 서브웨이 이벤트 시작 -->
+  <section class="max-w-full">
+    <h1 class="ml-4 text-xl font-bold mb-6">썹! 프라이즈</h1>
+    <a class="w-full" href="http://subway.co.kr/eventView?eventIdx=170" target="_blank">
+      <img src="http://subway.co.kr/upload/banner/00_%EC%8D%A8%EB%B8%8C%EC%9B%A8%EC%9D%B4_Main_02_20200427112753722.jpg" alt="이벤트 배너">
     </a>
-  </li>
-  {% endfor %}
-</ul>
+  </section>
+  <!-- 서브웨이 이벤트 끝 -->
+</div>
 
 {% endblock context %}
