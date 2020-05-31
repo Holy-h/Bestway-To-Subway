@@ -6,8 +6,14 @@ module.exports = {
         "72": "18rem",
         "84": "21rem",
       },
+      minWidth: {
+        "40": "10rem",
+      },
     },
   },
-  variants: {},
+  variants: {
+    margin: ["responsive", "last"],
+    textColor: ["responsive", "hover", "group-hover", "focus"],
+  },
   plugins: [],
 };

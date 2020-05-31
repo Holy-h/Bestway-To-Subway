@@ -5,22 +5,187 @@
 
 {% block context %}
 
-<h1>{{sandwich.menu}}</h1>
-<img src="/media/{{sandwich.menu.photo}}"/>
+<div class="container mx-auto mt-32 mb-20 text-center">
+  <!-- main 시작 -->
+  <main class="grid grid-flow-row gap-10">
+    <!-- 메뉴 시작 -->
+    <section>
+      <h1 class="text-2xl mb-4 font-bold">{{sandwich.menu}}</h1>
+      <div class="px-4">
+        <img class="object-contain h-40 w-84 mx-auto rounded-full border border-yellow-400 " src="/media/{{sandwich.menu.photo}}"/>
+      </div>
+    </section>
+    <!-- 메뉴 끝 -->
+    
+    <!-- 빵 시작 -->
+    <section>
+      <div class="mb-2">
+        <img
+          class="object-contain h-20 w-40 mx-auto rounded-full border border-gray-400"
+          src="/media/{{ sandwich.bread.photo }}" />
+      </div>
+      <p class="font-bold">{{ sandwich.bread }}</p>
+    </section>
+    <!-- 빵 끝 -->
 
-<p>{{ sandwich.bread }}</p>
-<img src="/media/{{ sandwich.bread.photo }}" />
+    <!-- 치즈 시작 -->
+    <section class="px-4">
+      <ul class="grid grid-flow-row grid-cols-2 sm:grid-cols-3 justify-center gap-6">
+        {% for cheese in sandwich.cheeses.all %}
+        <li>
+          <div class="mb-2">
+            <img
+              class="object-contain h-20 w-40 mx-auto rounded-full border border-gray-400"
+              src="/media/{{ cheese.photo }}"
+            />
+          </div>
+          <p class="font-bold">{{ cheese.name }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <!-- 치즈 끝 -->
 
-{% for cheese in sandwich.cheeses.all %}
-  <p>{{ cheese.name }}</p>
-  <img src="/media/{{ cheese.photo }}" />
-{% endfor %}
+    <!-- 소스 시작 -->
+    <section>
+      <ul class="grid grid-flow-row grid-cols-2 sm:grid-cols-3 justify-center gap-6">
+        {% for sauce in sandwich.sauces.all %}
+        <li>
+          <div class="mb-2">
+            <img
+              class="object-contain h-20 w-40 mx-auto rounded-full border border-gray-400"
+              src="/media/{{ sauce.photo }}"
+            />
+          </div>
+          <p class="font-bold">{{ sauce.name }}</p>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+    <!-- 소스 끝 -->
 
-{% for sauce in sandwich.sauces.all %}
-  <p>{{ sauce.name }}</p>
-  <img src="/media/{{ sauce.photo }}" />
-{% endfor %}
+    <!-- 아이콘그룹 시작 -->
+    <section class="bg-red-100 py-6 flex">
+      <button class="group flex flex-col ml-auto items-center py-2 w-24">
+        <i class="far fa-heart text-xl text-gray-600 group-hover:text-red-600 mb-1"></i>
+        <span>{{ sandwich.orders }}</span>
+      </button>
+      <button class="group flex flex-col mr-auto items-center py-2 w-24">
+        <i class="fas fa-share-alt text-xl text-gray-600 group-hover:text-blue-600 mb-1"></i>
+        <span>공유하기</span>
+      </button>
+    </section>
+    <!-- 아이콘그룹 끝 -->
+  </main>
+  <!-- main 끝 -->
 
-<h2>{{ sandwich.get_total_calories }}</h2>
+  <!-- AD 시작 -->
+  <section class="bg-gray-400 flex my-10">
+    <img
+      class="mx-auto"
+      src="https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=&webp=1"
+      alt=""
+      srcset=
+        "
+          https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=1280&webp=1 1.5x,
+          https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=1536&webp=1 2x,
+          https://image.ohou.se/i/bucketplace-v2-development/uploads/contests/mobile_banner/158986238816357738.png?gif=1&w=2560&webp=1 3x
+        "
+    >
+  </section>
+  <!-- AD 끝 -->
+
+  <!-- 칼로리 시작 -->
+  <section class="mb-20">
+    <h1 class="text-lg font-bold mb-6">칼로리</h1>
+    <div class="relative w-84 h-16 mx-auto flex rounded-lg overflow-auto border hover:border-red-300">
+      <div class="z-10 absolute flex inset-0 transition duration-300 ease-out bg-green-300 hover:opacity-0">
+        <h2 class="m-auto">
+          우리가 굳이 알아야 할 필요가 있을까요?
+        </h2>
+      </div>
+      <h2 class="m-auto font-bold">{{ sandwich.get_total_calories }} 😳</h2>
+    </div>
+  </section>
+  <!-- 칼로리 끝 -->
+
+  <!-- 주문하기 시작 -->
+  <section class="mb-20">
+    <h1 class="text-lg font-bold mb-6">서브웨이에서 주문하기 힘들다면?</h1>
+    <a
+      class="py-4 px-10 font-semibold rounded-full border border-green-400 hover:bg-green-500 hover:text-white"
+      href="#"
+    >
+      이 메뉴로 주문하는 방법!
+    </a>
+  </section>
+  <!-- 주문하기 끝 -->
+
+  <!-- 같은 메뉴 다른 레시피 시작 -->
+  {% if same_menu_sandwiches %}
+    <section class="max-w-full overflow-x-auto mb-20">
+      <h1 class="text-left text-xl font-bold ml-4 xl:ml-0 mb-6">
+        {{ sandwich.menu }}의 다른 레시피!
+      </h1>
+      <div class="overflow-x-auto">
+        <ul class="w-auto grid grid-flow-col gap-8 px-4 xl:px-0">
+          {% for sandwich in same_menu_sandwiches %}
+          <li class="border border-gray-200 w-72 text-lg font-semibold">
+            <a
+              class="bg-orange-400 hover:bg-orange-500 w-72 grid grid-flow-row gap-6 py-6 rounded-lg"
+              href="{% url 'sandwiches:detail' sandwich.pk %}"
+            >
+              <span class="px-2">
+                🍞{{sandwich.bread}}
+              </span>
+              <span class="break-words px-2">
+                🧀{{ sandwich.cheeses.all|join:", " }}
+              </span>
+              <span class="break-words px-2">
+                🥫{{ sandwich.sauces.all|join:", " }}
+              </span>
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+  {% endif %}
+  <!-- 같은 메뉴 다른 레시피 끝 -->
+
+  <!-- 다른 메뉴 시작 -->
+  <section class="max-w-full overflow-x-auto">
+    <h1 class="text-left text-xl font-bold ml-4 xl:ml-0 mb-6">
+      다른 메뉴는 뭐가 있을까요??
+    </h1>
+    <div class="overflow-x-scroll">
+      <ul class="w-auto grid grid-flow-col gap-8 px-4 xl:px-0">
+        {% for sandwich in other_sandwiches %}
+        <li class="text-lg font-semibold">
+          <a
+            class="border border-gray-200 bg-yellow-400 hover:bg-yellow-500 w-72 h-full grid grid-flow-row text-center gap-6 rounded-lg py-6"
+            href="{% url 'sandwiches:detail' sandwich.pk %}"
+          >
+            <span class="px-2">
+              {{sandwich.menu}}
+            </span>
+            <img src="/media/{{sandwich.menu.photo}}" alt="menu-image" />
+            <span class="px-2">
+              🍞{{sandwich.bread}}
+            </span>
+            <span class="break-words px-2">
+              🧀{{ sandwich.cheeses.all|join:", " }}
+            </span>
+            <span class="break-words px-2">
+              🥫{{ sandwich.sauces.all|join:", " }}
+            </span>
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </section>
+  <!-- 다른 메뉴 끝 -->
+</div>
 
 {% endblock context %}
