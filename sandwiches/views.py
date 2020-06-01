@@ -12,7 +12,7 @@ def sandwich_detail(request, pk):
     )
     other_sandwiches = models.Sandwich.objects.all().order_by("?")[:5]
 
-    print(other_sandwiches)
+    # print(other_sandwiches)
     return render(
         request,
         "detail.html",
@@ -22,3 +22,10 @@ def sandwich_detail(request, pk):
             "other_sandwiches": other_sandwiches,
         },
     )
+
+
+def sandwich_order(request, pk):
+    sandwich = get_object_or_404(models.Sandwich, pk=pk)
+    sandwich.orders += 1
+    sandwich.save()
+    return redirect(reverse("sandwiches:detail", kwargs={"pk": pk}))
