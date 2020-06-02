@@ -18,5 +18,8 @@
     "gulp-sass": "^4.1.0",
     "node-sass": "^4.14.1",
     "tailwindcss": "^1.4.6"
+  },
+  "dependencies": {
+    "clipboard": "^2.0.6"
   }
 }

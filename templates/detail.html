@@ -87,10 +87,12 @@
         <span>{{ sandwich.orders }}</span>
       </a>
       <button
-        class="group flex flex-col mr-auto items-center py-2 w-24"
-        onclick="copy()"
+        class="group flex flex-col mr-auto items-center py-2 w-24 copy"
+        data-clipboard-text="127.0.0.1:8000{% url 'sandwiches:detail' sandwich.pk %}"
       >
-        <i class="fas fa-share-alt text-xl text-gray-600 group-hover:text-blue-600 mb-1"></i>
+        <i
+          class="fas fa-share-alt text-xl text-gray-600 group-hover:text-blue-600 mb-1"
+        ></i>
         <span>공유하기</span>
       </button>
     </section>
@@ -197,15 +199,24 @@
   <!-- 다른 메뉴 끝 -->
 </div>
 
+<!-- Include library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js"></script>
+
+<!-- Instantiate clipboard by passing a string selector -->
 <script>
-  function copy() {
-    let dummy = document.createElement("textarea");
-    document.body.appendChild(dummy);
-    dummy.value = "127.0.0.1:8000{% url 'sandwiches:detail' sandwich.pk %}";
-    dummy.select();
-    document.execCommand("copy");
-    document.body.removeChild(dummy);
-  }
+  let clipboard = new ClipboardJS('.copy');
+  clipboard.on('success', function(e) {
+    console.info('Action:', e.action);
+    console.info('Text:', e.text);
+    console.info('Trigger:', e.trigger);
+
+    e.clearSelection();
+  });
+
+  clipboard.on('error', function(e) {
+      console.error('Action:', e.action);
+      console.error('Trigger:', e.trigger);
+  });
 </script>
 
 {% endblock context %}
