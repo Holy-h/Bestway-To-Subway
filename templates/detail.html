@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}
   Detail
 {% endblock title %}
@@ -85,7 +86,10 @@
         <i class="far fa-heart text-xl text-gray-600 group-hover:text-red-600 mb-1"></i>
         <span>{{ sandwich.orders }}</span>
       </a>
-      <button class="group flex flex-col mr-auto items-center py-2 w-24">
+      <button
+        class="group flex flex-col mr-auto items-center py-2 w-24"
+        onclick="copy()"
+      >
         <i class="fas fa-share-alt text-xl text-gray-600 group-hover:text-blue-600 mb-1"></i>
         <span>공유하기</span>
       </button>
@@ -119,22 +123,12 @@
           우리가 굳이 알아야 할 필요가 있을까요?
         </h2>
       </div>
-      <h2 class="m-auto font-bold">{{ sandwich.get_total_calories }} 😳</h2>
+      <h2 class="m-auto font-bold">
+        {{ sandwich.get_total_calories }} 😳
+      </h2>
     </div>
   </section>
   <!-- 칼로리 끝 -->
-
-  <!-- 주문하기 시작 -->
-  <!-- <section class="mb-20">
-    <h1 class="text-lg font-bold mb-6">서브웨이에서 주문하기 힘들다면?</h1>
-    <a
-      class="py-4 px-10 font-semibold rounded-full border border-green-400 hover:bg-green-500 hover:text-white"
-      href="#"
-    >
-      이 메뉴로 주문하는 방법!
-    </a>
-  </section> -->
-  <!-- 주문하기 끝 -->
 
   <!-- 같은 메뉴 다른 레시피 시작 -->
   {% if same_menu_sandwiches %}
@@ -202,5 +196,16 @@
   </section>
   <!-- 다른 메뉴 끝 -->
 </div>
+
+<script>
+  function copy() {
+    let dummy = document.createElement("textarea");
+    document.body.appendChild(dummy);
+    dummy.value = "127.0.0.1:8000{% url 'sandwiches:detail' sandwich.pk %}";
+    dummy.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummy);
+  }
+</script>
 
 {% endblock context %}
